@@ -1,6 +1,6 @@
 {
   "name": "node-redis-io",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Redis I/O functions",
   "main": "build/index.js",
   "scripts": {
