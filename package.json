@@ -1,5 +1,5 @@
 {
-  "name": "redis_riot",
+  "name": "node-redis-io",
   "version": "1.0.0",
   "description": "Redis I/O functions",
   "main": "build/index.js",
@@ -29,5 +29,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/miteshkotak/redis_riot.git"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/miteshkotak/redis_riot/issues"
+  },
+  "homepage": "https://github.com/miteshkotak/redis_riot#readme"
 }

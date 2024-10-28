@@ -1,6 +1,6 @@
 import Redis from 'ioredis'
 
-interface ExportData {
+export interface ExportData {
     [key: string]: any 
 }
 
@@ -85,11 +85,3 @@ class RedisExporter {
         await this.destRedis.quit()
     }
 }
-
-// Usage
-const sourceConfig = { host: '127.0.0.1', port: 6380 }
-const destConfig = { host: '127.0.0.1', port: 6379 }
-const collectionName = process.argv[2]
-
-const redisExporter = new RedisExporter(sourceConfig, destConfig)
-redisExporter.exportAndImportCollection(collectionName)
