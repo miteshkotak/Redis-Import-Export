@@ -1,0 +1,33 @@
+{
+  "name": "redis_riot",
+  "version": "1.0.0",
+  "description": "Redis I/O functions",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "rimraf ./build && npx tsc ",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "Redis"
+  ],
+  "author": "miteshkotak7@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.4.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^18.0.0",
+    "rimraf": "^6.0.1"
+  },
+  "files": [
+    "build/**/*",
+    "package.json",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miteshkotak/redis_riot.git"
+  }
+}
