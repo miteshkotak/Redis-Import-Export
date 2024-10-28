@@ -98,10 +98,10 @@ export class RedisExporter {
 }
 
 
-const collectionName = 'sample_jobQueue:*' // Get collection name from request body
-const sourceConfig = { host: 'localhost', port: 6380 }
-const destConfig = { host: 'localhost', port: 6379 }
+// const collectionName = 'sample_jobQueue:*' // Get collection name from request body
+// const sourceConfig = { host: 'localhost', port: 6380 }
+// const destConfig = { host: 'localhost', port: 6379 }
 
-const redisExporter = new RedisExporter(sourceConfig, destConfig)
-redisExporter.listCollections()
-redisExporter.exportAndImportCollection(collectionName)
+// const redisExporter = new RedisExporter(sourceConfig, destConfig)
+// redisExporter.listCollections()
+// redisExporter.exportAndImportCollection(collectionName)
