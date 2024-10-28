@@ -5,7 +5,7 @@ export interface ExportData {
 }
 
 
-class RedisExporter {
+export class RedisExporter {
     sourceRedis: any
     destRedis: any
     constructor(sourceConfig: any, destConfig: any) {
