@@ -13,6 +13,17 @@ export class RedisExporter {
         this.destRedis  = new Redis(destConfig)
     }
 
+    async listCollections() {
+        try {
+            const keys = await this.sourceRedis.keys('*'); // Retrieve all keys
+            console.log(`Found ${keys.length} collections:`, keys);
+            return keys; // Return the list of keys
+        } catch (error) {
+            console.error('Error listing collections:', error);
+            return []; // Return an empty array on error
+        }
+    }
+
     async exportAndImportCollection(collectionName: String) {
         try {
             const exportData = await this.exportData(collectionName)
@@ -85,3 +96,12 @@ export class RedisExporter {
         await this.destRedis.quit()
     }
 }
+
+
+const collectionName = 'sample_jobQueue:*' // Get collection name from request body
+const sourceConfig = { host: 'localhost', port: 6380 }
+const destConfig = { host: 'localhost', port: 6379 }
+
+const redisExporter = new RedisExporter(sourceConfig, destConfig)
+redisExporter.listCollections()
+redisExporter.exportAndImportCollection(collectionName)
