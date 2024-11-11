@@ -3,9 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RedisExporter = void 0;
+exports.RedisIO = void 0;
 const ioredis_1 = __importDefault(require("ioredis"));
-class RedisExporter {
+class RedisIO {
     constructor(sourceConfig, destConfig) {
         this.sourceRedis = new ioredis_1.default(sourceConfig);
         this.destRedis = new ioredis_1.default(destConfig);
@@ -110,21 +110,21 @@ class RedisExporter {
         await this.destRedis.quit();
     }
 }
-exports.RedisExporter = RedisExporter;
+exports.RedisIO = RedisIO;
+//Example on how to use
 // const collectionName = 'sample_jobQueue:*' // Get collection name from request body
-const sourceConfig = { host: 'localhost', port: 6380 };
-// const destConfig = { host: 'localhost', port: 6379 }
-const redisExporter = new RedisExporter(sourceConfig);
-// redisExporter.listCollections()
-// redisExporter.exportAndImportCollection(collectionName)
-// const importData = JSON.parse(fs.readFileSync('redis_data.json', 'utf-8')); // Read data from JSON file // Get collection name from request body
-async function mainv1(collectionName) {
-    try {
-        const data = await redisExporter.exportData(collectionName);
-        console.log('success:', data);
-    }
-    catch (error) {
-        console.log('error');
-    }
-}
-mainv1('sample_session:*');
+// const sourceConfig = { host: 'localhost', port: 6380 }
+// // const destConfig = { host: 'localhost', port: 6379 }
+// const redisExporter = new RedisIO(sourceConfig)
+// // redisExporter.listCollections()
+// // redisExporter.exportAndImportCollection(collectionName)
+// // const importData = JSON.parse(fs.readFileSync('redis_data.json', 'utf-8')); // Read data from JSON file // Get collection name from request body
+// async function mainv1 (collectionName: any) {
+//     try {
+//         const data = await redisExporter.exportData(collectionName)
+//         console.log('success:', data)
+//     } catch (error) {
+//         console.log('error')
+//     }
+// }
+// mainv1('sample_session:*')
