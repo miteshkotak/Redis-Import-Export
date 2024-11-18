@@ -78,7 +78,7 @@ export class RedisIO {
         }
     }
 
-    async importData(importData: ImportData) {
+    async importData(importData: ImportData, expiryDays?: number) {
         try {
             for (const [key, value] of Object.entries(importData)) {
                 const type = await this.sourceRedis.type(key)
@@ -101,7 +101,12 @@ export class RedisIO {
                     default:
                         await this.destRedis.set(key, JSON.stringify(value))
                 }
+                     // Set expiry if provided
+                     if (expiryDays) {
+                        await this.destRedis.expire(key, expiryDays * 24 * 60 * 60); // Convert days to seconds
+                    }
             }
+            
         } catch (error) {
             return  console.error('Error during Importing Data:', error)
         }finally {
@@ -120,21 +125,33 @@ export class RedisIO {
 
 // const collectionName = 'sample_jobQueue:*' // Get collection name from request body
 // const sourceConfig = { host: 'localhost', port: 6380 }
-// // const destConfig = { host: 'localhost', port: 6379 }
+// // // const destConfig = { host: 'localhost', port: 6379 }
 
 // const redisExporter = new RedisIO(sourceConfig)
-// // redisExporter.listCollections()
-// // redisExporter.exportAndImportCollection(collectionName)
-// // const importData = JSON.parse(fs.readFileSync('redis_data.json', 'utf-8')); // Read data from JSON file // Get collection name from request body
+// // // redisExporter.listCollections()
+// // // redisExporter.exportAndImportCollection(collectionName)
+// // // const importData = JSON.parse(fs.readFileSync('redis_data.json', 'utf-8')); // Read data from JSON file // Get collection name from request body
+// let exportData : any
 
-// async function mainv1 (collectionName: any) {
+
+// async function mainExport (collectionName: any) {
 //     try {
-//         const data = await redisExporter.exportData(collectionName)
-//         console.log('success:', data)
+//         exportData = await redisExporter.exportData(collectionName)
+//         console.log('success:', exportData)
 //     } catch (error) {
 //         console.log('error')
 //     }
 
 // }
 
-// mainv1('sample_session:*')
+// // async function mainImport (importData: any) {
+// //     try {
+// //         const data = await redisExporter.importData(importData)
+// //         console.log('success:', data)
+// //     } catch (error) {
+// //         console.log('error')
+// //     }
+
+// // }
+// //mainExport('sample_jobQueue:*')
+// mainImport(importData)
