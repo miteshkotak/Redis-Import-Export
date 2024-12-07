@@ -1,5 +1,5 @@
 import Redis from 'ioredis'
-
+import fs from 'fs'
 
 export interface ExportData {
     [key: string]: any 
@@ -70,6 +70,7 @@ export class RedisIO {
                         console.warn(`Skipping key ${key} of type ${type}`)
                 }
             }
+            await this.saveToFile('dump.rdb', exportData)
             return exportData
         } catch (error) {
             return  console.error('Error during Exporting collection data:', error)
@@ -78,6 +79,10 @@ export class RedisIO {
         }
     }
 
+      // New method to save data to a file
+      async saveToFile(filename: string, data: ExportData) {
+        await fs.writeFile(filename, JSON.stringify(data))
+    }
     async importData(importData: ImportData, expiryDays?: number) {
         try {
             for (const [key, value] of Object.entries(importData)) {
@@ -124,11 +129,11 @@ export class RedisIO {
 //Example on how to use
 
 // const collectionName = 'sample_jobQueue:*' // Get collection name from request body
-// const sourceConfig = { host: 'localhost', port: 6380 }
+// const sourceConfig = { host: 'localhost', port: 6379 }
 // // // const destConfig = { host: 'localhost', port: 6379 }
 
 // const redisExporter = new RedisIO(sourceConfig)
-// // // redisExporter.listCollections()
+// redisExporter.listCollections()
 // // // redisExporter.exportAndImportCollection(collectionName)
 // // // const importData = JSON.parse(fs.readFileSync('redis_data.json', 'utf-8')); // Read data from JSON file // Get collection name from request body
 // let exportData : any
@@ -153,5 +158,5 @@ export class RedisIO {
 // //     }
 
 // // }
-// //mainExport('sample_jobQueue:*')
+// mainExport('sample_jobQueue:*')
 // mainImport(importData)

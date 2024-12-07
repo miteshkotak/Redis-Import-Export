@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "build": "rimraf ./build && npx tsc ",
-    "start": "npm run build && node build/index.js"
+    "start": "npm run build && node build/index.js",
+    "watch": "tsc -p ./tsconfig.json --watch"
   },
   "keywords": [
     "Redis"
