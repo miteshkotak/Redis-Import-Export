@@ -1,5 +1,5 @@
 import Redis from 'ioredis'
-
+import fs from 'fs'
 
 export interface ExportData {
     [key: string]: any 
@@ -81,7 +81,6 @@ export class RedisIO {
 
       // New method to save data to a file
       async saveToFile(filename: string, data: ExportData) {
-        const fs = require('fs').promises
         await fs.writeFile(filename, JSON.stringify(data))
     }
     async importData(importData: ImportData, expiryDays?: number) {
