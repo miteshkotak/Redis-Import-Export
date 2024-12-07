@@ -130,25 +130,25 @@ export class RedisIO {
 //Example on how to use
 
 // const collectionName = 'sample_jobQueue:*' // Get collection name from request body
-const sourceConfig = { host: 'localhost', port: 6379 }
+// const sourceConfig = { host: 'localhost', port: 6379 }
 // // // const destConfig = { host: 'localhost', port: 6379 }
 
-const redisExporter = new RedisIO(sourceConfig)
-redisExporter.listCollections()
+// const redisExporter = new RedisIO(sourceConfig)
+// redisExporter.listCollections()
 // // // redisExporter.exportAndImportCollection(collectionName)
 // // // const importData = JSON.parse(fs.readFileSync('redis_data.json', 'utf-8')); // Read data from JSON file // Get collection name from request body
-let exportData : any
+// let exportData : any
 
 
-async function mainExport (collectionName: any) {
-    try {
-        exportData = await redisExporter.exportData(collectionName)
-        console.log('success:', exportData)
-    } catch (error) {
-        console.log('error')
-    }
+// async function mainExport (collectionName: any) {
+//     try {
+//         exportData = await redisExporter.exportData(collectionName)
+//         console.log('success:', exportData)
+//     } catch (error) {
+//         console.log('error')
+//     }
 
-}
+// }
 
 // // async function mainImport (importData: any) {
 // //     try {
@@ -159,5 +159,5 @@ async function mainExport (collectionName: any) {
 // //     }
 
 // // }
-mainExport('sample_jobQueue:*')
+// mainExport('sample_jobQueue:*')
 // mainImport(importData)
